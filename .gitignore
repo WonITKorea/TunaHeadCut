@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+.venv/
+axis_config.json
+*.dll
+*.exe
+*.lib

@@ -1,0 +1,10 @@
+{
+  "min_position_counts": null,
+  "max_position_counts": null,
+  "speed": null,
+  "acceleration_ms": 500,
+  "deceleration_ms": 500,
+  "position_tolerance_counts": 10,
+  "move_timeout_s": 30.0,
+  "poll_interval_s": 0.02
+}
