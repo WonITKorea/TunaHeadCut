@@ -1,6 +1,7 @@
 {
-  "min_position_counts": null,
-  "max_position_counts": null,
+  "min_position_counts": 2786203,
+  "max_position_counts": 2794600,
+  "reverse_direction": true,
   "speed": null,
   "acceleration_ms": 500,
   "deceleration_ms": 500,

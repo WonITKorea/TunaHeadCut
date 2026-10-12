@@ -3,15 +3,17 @@
 MR-MC240N PCIe 보드 + MR-J4-10B-RJ 서보앰프 + HG-KR13 모터의 **1축 절대 위치 제어**입니다.
 CTR_ClampRing의 PCIe API 구성과 상태 비트 정의를 참고했으며 Python 표준 라이브러리만 사용합니다.
 
-Python에서 받은 `0~1` 값을 기구의 최소·최대 위치 사이로 변환합니다.
+Python에서 받은 `0~1` 값을 Start·End 절대 위치 사이로 변환합니다.
+기본 시뮬레이션과 설정 예제는 Start `2794600`, End `2786203`을 사용합니다.
 
 ```text
-목표 카운트 = round(최소 카운트 + 입력값 × (최대 카운트 − 최소 카운트))
+목표 카운트 = round(Start + 입력값 × (End − Start))
+           = round(2794600 − 입력값 × 8397)
 ```
 
-- `0`: 기구의 최소 위치
-- `0.5`: 두 위치의 중간
-- `1`: 기구의 최대 위치
+- `0`: Start, 2794600
+- `0.5`: 두 위치의 중간, 2790402 (Python의 짝수 반올림)
+- `1`: End, 2786203
 - 동일한 입력을 반복해도 같은 절대 위치를 목표로 합니다.
 - 이미 목표의 허용 오차 안에서 위치결정 완료 상태이면 새 이동을 생략합니다.
 - 범위 밖 값, NaN, 무한대, 잘못된 문자열은 거부합니다.
@@ -30,7 +32,7 @@ python main.py 0 0.5 1
 python main.py
 ```
 
-기본은 시뮬레이션입니다. 설정을 생략하면 설명용 `0~10000` 카운트를 사용합니다.
+기본은 시뮬레이션입니다. 설정을 생략하면 `2794600 → 2786203` 카운트를 사용합니다.
 첫 번째 명령은 세 위치를 순서대로 계산·모의 이동하고, 두 번째는 키보드 입력을 받습니다.
 `status`는 현재 상태, `q` 또는 EOF는 종료, `Ctrl+C`는 중단 후 정리입니다.
 시뮬레이터는 즉시 위치가 바뀌며 실제 모터의 시간·관성·정지 거리를 재현하지 않습니다.
@@ -63,8 +65,8 @@ python dummy_tcp_client.py --include-invalid --fragment-bytes 1
 잘못된 입력과 이동 오류도 같은 터미널에 기록합니다. 출력 예:
 
 ```text
-[14:30:00] MOVE request: input=0.5 target=5000
-[14:30:00] MOVE done: input=0.5 target=5000 feedback=5000 elapsed=0.001s
+[14:30:00] MOVE request: input=0.5 target=2790402
+[14:30:00] MOVE done: input=0.5 target=2790402 feedback=2790402 elapsed=0.001s
 ```
 
 `request`는 위치 명령 요청, `done`은 위치결정 완료 확인입니다. 이미 목표의 허용 오차
@@ -102,7 +104,7 @@ ASCII 숫자 하나 뒤에 LF(`\n`)를 붙입니다. CRLF도 지원하며 한 �
 예를 들어 `0.5\n`을 전송하면 위치결정 완료 후 아래 형태의 UTF-8 JSON 한 줄을 돌려줍니다.
 
 ```json
-{"ok":true,"input":0.5,"target_counts":5000,"feedback_counts":5000}
+{"ok":true,"input":0.5,"target_counts":2790402,"feedback_counts":2790402}
 ```
 
 위 카운트는 기본 모의 범위에서의 예입니다. 실제 응답은 설정된 범위와 피드백을 사용합니다.
@@ -147,13 +149,15 @@ Copy-Item axis_config.example.json axis_config.json
 ```
 
 `axis_config.json`의 다음 값을 실제 기구에 맞춰 수정하세요. 파일은 Git에서 제외됩니다.
-실제 범위와 속도는 아직 정해지지 않았으므로 예제 파일의 필수값은 `null`로 두었습니다.
-필수값을 입력하기 전에는 이동을 실행할 수 없습니다.
+예제 파일에는 최소 `2786203`, 최대 `2794600`, `reverse_direction: true`를 반영했습니다.
+실장비 속도는 아직 정해지지 않았으므로 `speed`는 `null`입니다. 속도를 입력하기 전에는
+이 설정 파일로 이동을 실행할 수 없습니다. 기존 설정 파일은 자동으로 변경되지 않습니다.
 
 | 설정 | 의미 |
 |---|---|
-| `min_position_counts` | 입력 0에 해당하는 최소 위치 카운트 |
-| `max_position_counts` | 입력 1에 해당하는 최대 위치 카운트; 최소값보다 커야 함 |
+| `min_position_counts` | 위치 범위의 숫자상 최솟값; 현재 End 2786203 |
+| `max_position_counts` | 위치 범위의 숫자상 최댓값; 현재 Start 2794600 |
+| `reverse_direction` | `true`: 입력 0=최댓값, 1=최솟값. 생략 또는 `false`: 기존 0=최솟값, 1=최댓값 |
 | `speed` | 보드에 설정된 속도 단위의 양의 정수; rpm으로 자동 환산하지 않음 |
 | `acceleration_ms`, `deceleration_ms` | 가속·감속 시간 상수, 1~20000 ms |
 | `position_tolerance_counts` | 도착 판정 허용 오차; 기본 10 카운트 |

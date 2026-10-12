@@ -72,16 +72,16 @@ def main(argv: list[str] | None = None) -> int:
                 backend.close()
             return 0
         config = (AxisConfig.from_file(args.config) if args.config else
-                  AxisConfig(0, 10_000, 1000))
+                  AxisConfig(2_786_203, 2_794_600, 1000, reverse_direction=True))
         if args.hardware:
             backend = MrMc240nBackend(args.dll, board_id=args.board_id,
                                      axis_number=args.axis, point_number=args.point)
             print(f"HARDWARE: board {args.board_id}, axis {args.axis}; "
-                  f"0={config.min_position_counts}, 1={config.max_position_counts}")
+                  f"0={config.target_counts(0)}, 1={config.target_counts(1)}")
         else:
-            backend = SimulatedBackend(config.min_position_counts)
+            backend = SimulatedBackend(config.target_counts(0))
             print("SIMULATION: no hardware connection; "
-                  f"0={config.min_position_counts}, 1={config.max_position_counts}")
+                  f"0={config.target_counts(0)}, 1={config.target_counts(1)}")
         with NormalizedAxis(backend, config) as axis:
             if args.status:
                 print(json.dumps(asdict(axis.status()), indent=2))

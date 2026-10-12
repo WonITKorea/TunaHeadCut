@@ -1,4 +1,5 @@
 from dataclasses import replace
+import json
 import tempfile
 from pathlib import Path
 import unittest
@@ -20,6 +21,14 @@ class MappingTests(unittest.TestCase):
             with self.subTest(value=value), self.assertRaises(ValueError):
                 self.config.target_counts(value)
 
+    def test_decreasing_absolute_encoder_endpoints(self):
+        config = AxisConfig(2786203, 2794600, 100, reverse_direction=True)
+        self.assertEqual([config.target_counts(v) for v in (0, 0.25, 0.5, 0.75, 1)],
+                         [2794600, 2792501, 2790402, 2788302, 2786203])
+        for value in (-0.001, 1.001, "nan", "inf"):
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                config.target_counts(value)
+
     def test_full_signed_board_position_range(self):
         config = AxisConfig(-(2**31), 2**31 - 1, 100)
         self.assertEqual(config.target_counts(0), -(2**31))
@@ -33,6 +42,7 @@ class MappingTests(unittest.TestCase):
             {"acceleration_ms": 0}, {"deceleration_ms": 20001},
             {"move_timeout_s": float("nan")}, {"poll_interval_s": 2},
             {"position_tolerance_counts": 8000},
+            {"reverse_direction": 1}, {"reverse_direction": "true"},
         ):
             with self.subTest(changes=changes), self.assertRaises(ValueError):
                 replace(self.config, **changes)
@@ -48,6 +58,19 @@ class MappingTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 AxisConfig.from_file(config_file)
 
+    def test_example_calibration_loads_with_explicit_speed(self):
+        example = Path(__file__).resolve().parents[1] / "axis_config.example.json"
+        data = json.loads(example.read_text(encoding="utf-8"))
+        with self.assertRaises(ValueError):
+            AxisConfig(**data)
+        data["speed"] = 100
+        with tempfile.TemporaryDirectory() as directory:
+            config_file = Path(directory) / "axis.json"
+            config_file.write_text(json.dumps(data), encoding="utf-8")
+            config = AxisConfig.from_file(config_file)
+        self.assertEqual([config.target_counts(v) for v in (0, 0.5, 1)],
+                         [2794600, 2790402, 2786203])
+
 
 class MotionTests(unittest.TestCase):
     def setUp(self):
@@ -61,6 +84,20 @@ class MotionTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             self.axis.move_normalized(0.5)
         self.axis.close()
+
+    def test_reverse_motion_preserves_absolute_travel_limits(self):
+        config = AxisConfig(2786203, 2794600, 100, reverse_direction=True,
+                            position_tolerance_counts=0)
+        backend = SimulatedBackend(2794600)
+        with NormalizedAxis(backend, config) as axis:
+            axis.arm()
+            for value, expected in ((0, 2794600), (0.5, 2790402), (1, 2786203),
+                                    (0, 2794600)):
+                self.assertEqual(axis.move_normalized(value), expected)
+            for outside in (2786202, 2794601):
+                with self.subTest(outside=outside), self.assertRaisesRegex(
+                        RuntimeError, "outside the configured travel range"):
+                    replace(axis.status(), position_counts=outside).check(config)
 
     def test_repeated_input_does_not_accumulate_relative_moves(self):
         with self.axis:

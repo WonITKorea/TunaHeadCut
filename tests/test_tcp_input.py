@@ -247,7 +247,9 @@ class TcpProcessTests(unittest.TestCase):
             replies = [json.loads(line)["response"] for line in sender.stdout.splitlines()
                        if line.startswith("{")]
             self.assertEqual([reply["feedback_counts"] for reply in replies if reply["ok"]],
-                             [0, 2500, 5000, 7500, 10000])
+                             [2794600, 2792501, 2790402, 2788302, 2786203])
+            self.assertEqual([reply["target_counts"] for reply in replies if reply["ok"]],
+                             [2794600, 2792501, 2790402, 2788302, 2786203])
             self.assertEqual(sum(not reply["ok"] for reply in replies), 6)
             self.assertIn("PASS: 11 responses", sender.stdout)
             self.assertEqual(receiver.wait(timeout=5), 0, "".join(output))

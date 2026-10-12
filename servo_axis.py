@@ -37,12 +37,15 @@ class AxisConfig:
     position_tolerance_counts: int = 10
     move_timeout_s: float = 30.0
     poll_interval_s: float = 0.02
+    reverse_direction: bool = False  # Input 0 starts at max; input 1 ends at min.
 
     def __post_init__(self) -> None:
         for name in ("min_position_counts", "max_position_counts"):
             integer_in_range(name, getattr(self, name), -(2**31), 2**31 - 1)
         if self.min_position_counts >= self.max_position_counts:
             raise ValueError("min_position_counts must be below max_position_counts.")
+        if type(self.reverse_direction) is not bool:
+            raise ValueError("reverse_direction must be a boolean.")
         integer_in_range("speed", self.speed, 1, 2**31 - 1)
         for name in ("acceleration_ms", "deceleration_ms"):
             integer_in_range(name, getattr(self, name), 1, 20_000)
@@ -69,8 +72,9 @@ class AxisConfig:
     def target_counts(self, value: float | str) -> int:
         number = normalized_value(value)
         # Round to the nearest board unit (Python's ties-to-even rule).
-        return round(self.min_position_counts + number * (
-            self.max_position_counts - self.min_position_counts))
+        start = self.max_position_counts if self.reverse_direction else self.min_position_counts
+        end = self.min_position_counts if self.reverse_direction else self.max_position_counts
+        return round(start + number * (end - start))
 
 
 @dataclass(frozen=True)

@@ -13,7 +13,9 @@ class CliTests(unittest.TestCase):
             self.assertEqual(main.main(["0", "0.5", "1"]), 0)
         real.assert_not_called()
         self.assertIn("SIMULATION", output.getvalue())
-        self.assertIn("target=5000, feedback=5000", output.getvalue())
+        self.assertIn("0=2794600, 1=2786203", output.getvalue())
+        for target in (2794600, 2790402, 2786203):
+            self.assertIn(f"target={target}, feedback={target}", output.getvalue())
 
     def test_batch_is_validated_before_any_connection(self):
         with contextlib.redirect_stderr(io.StringIO()), patch("main.SimulatedBackend") as backend:
