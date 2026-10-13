@@ -1,0 +1,156 @@
+{
+  "created_at": "2026-10-13T04:04:14.625569+00:00",
+  "reference_scope": "Motor bench arbitrary midpoint; not machine calibration",
+  "flash_saved": true,
+  "flash_loaded": true,
+  "controller_restart_verified": true,
+  "physical_power_cycle_tested": false,
+  "commands": [
+    "sscSaveAllParameterToFlashROM timeout=30000",
+    "SEMI=ON SON=OFF before controller reboot",
+    "sscReboot -> READY",
+    "sscLoadAllParameterFromFlashROM",
+    "Restore 3 point entries from saved readback; Flash API stores parameters",
+    "sscSystemStart -> RUNNING; SON remains OFF",
+    "SEMI=OFF for motor-bench ready state; SON=OFF"
+  ],
+  "errors": [],
+  "before_status": {
+    "position_counts": 2791185,
+    "system_running": true,
+    "servo_ready": false,
+    "operating": false,
+    "in_position": true,
+    "operation_complete": true,
+    "home_required": false,
+    "encoder_error": false,
+    "servo_alarm": false,
+    "operation_alarm": false,
+    "servo_warning": false,
+    "forced_stop": false,
+    "interlock_stop": false
+  },
+  "flash_parameter_mismatches": [],
+  "status_checks": [
+    {
+      "position_counts": 2791185,
+      "system_running": true,
+      "servo_ready": false,
+      "operating": false,
+      "in_position": true,
+      "operation_complete": true,
+      "home_required": false,
+      "encoder_error": false,
+      "servo_alarm": false,
+      "operation_alarm": false,
+      "servo_warning": false,
+      "forced_stop": false,
+      "interlock_stop": false
+    },
+    {
+      "position_counts": 2791189,
+      "system_running": true,
+      "servo_ready": false,
+      "operating": false,
+      "in_position": true,
+      "operation_complete": true,
+      "home_required": false,
+      "encoder_error": false,
+      "servo_alarm": false,
+      "operation_alarm": false,
+      "servo_warning": false,
+      "forced_stop": false,
+      "interlock_stop": false
+    },
+    {
+      "position_counts": 2791186,
+      "system_running": true,
+      "servo_ready": false,
+      "operating": false,
+      "in_position": true,
+      "operation_complete": true,
+      "home_required": false,
+      "encoder_error": false,
+      "servo_alarm": false,
+      "operation_alarm": false,
+      "servo_warning": false,
+      "forced_stop": false,
+      "interlock_stop": false
+    },
+    {
+      "position_counts": 2791187,
+      "system_running": true,
+      "servo_ready": false,
+      "operating": false,
+      "in_position": true,
+      "operation_complete": true,
+      "home_required": false,
+      "encoder_error": false,
+      "servo_alarm": false,
+      "operation_alarm": false,
+      "servo_warning": false,
+      "forced_stop": false,
+      "interlock_stop": false
+    },
+    {
+      "position_counts": 2791187,
+      "system_running": true,
+      "servo_ready": false,
+      "operating": false,
+      "in_position": true,
+      "operation_complete": true,
+      "home_required": false,
+      "encoder_error": false,
+      "servo_alarm": false,
+      "operation_alarm": false,
+      "servo_warning": false,
+      "forced_stop": false,
+      "interlock_stop": false
+    },
+    {
+      "position_counts": 2791185,
+      "system_running": true,
+      "servo_ready": false,
+      "operating": false,
+      "in_position": true,
+      "operation_complete": true,
+      "home_required": false,
+      "encoder_error": false,
+      "servo_alarm": false,
+      "operation_alarm": false,
+      "servo_warning": false,
+      "forced_stop": false,
+      "interlock_stop": false
+    }
+  ],
+  "final_status": {
+    "position_counts": 2791187,
+    "system_running": true,
+    "servo_ready": false,
+    "operating": false,
+    "in_position": true,
+    "operation_complete": true,
+    "home_required": false,
+    "encoder_error": false,
+    "servo_alarm": false,
+    "operation_alarm": false,
+    "servo_warning": false,
+    "forced_stop": false,
+    "interlock_stop": false
+  },
+  "coordinate_difference_after_controller_restart": 2,
+  "alarms": {
+    "system": {
+      "code": "0x0000",
+      "detail": "0x0000"
+    },
+    "servo": {
+      "code": "0x0000",
+      "detail": "0x0000"
+    },
+    "operation": {
+      "code": "0x0000",
+      "detail": "0x0000"
+    }
+  }
+}

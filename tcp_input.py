@@ -7,7 +7,7 @@ import socket
 from threading import Event
 import time
 
-from servo_axis import NormalizedAxis, integer_in_range, normalized_value
+from servo_axis import AxisStatus, NormalizedAxis, integer_in_range, normalized_value
 
 
 MAX_LINE_BYTES = 128
@@ -89,8 +89,18 @@ class PositionTCPServer:
         target = self.axis.config.target_counts(value)
         LOGGER.info("MOVE request: input=%s target=%d", value, target)
         started = time.monotonic()
+        last_report = started - 1.0
+
+        def progress(state: AxisStatus) -> None:
+            nonlocal last_report
+            now = time.monotonic()
+            if now - last_report >= 1.0:
+                LOGGER.info("MOVING: elapsed=%.1fs feedback=%d remaining=%d",
+                            now - started, state.position_counts, target - state.position_counts)
+                last_report = now
+
         try:
-            feedback = self.axis.move_normalized(value)
+            feedback = self.axis.move_normalized(value, on_progress=progress)
         except Exception as exc:
             self._error(connection, "motion_error", str(exc))
             raise MotionCommandError(f"TCP position command failed: {exc}") from exc
@@ -143,10 +153,14 @@ class PositionTCPServer:
         stop_event = stop_event if stop_event is not None else Event()
         while not stop_event.is_set():
             try:
-                connection, _peer = self._listener.accept()
+                connection, peer = self._listener.accept()
             except socket.timeout:
                 continue
-            with connection:
-                self._serve_client(connection, stop_event)
+            LOGGER.info("TCP connected: %s:%d", *peer)
+            try:
+                with connection:
+                    self._serve_client(connection, stop_event)
+            finally:
+                LOGGER.info("TCP disconnected: %s:%d", *peer)
             if once:
                 return

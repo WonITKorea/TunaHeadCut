@@ -1,0 +1,182 @@
+{
+  "created_at": "2026-10-13T03:44:28.966327+00:00",
+  "plan": "position_board\\backups\\ctr_apply_plan_20261013_124332.json",
+  "parameters_verified": [
+    {
+      "axis": 0,
+      "parameter": 14,
+      "before": 0,
+      "after": 23265
+    },
+    {
+      "axis": 1,
+      "parameter": 515,
+      "before": 0,
+      "after": 1
+    },
+    {
+      "axis": 1,
+      "parameter": 526,
+      "before": 8192,
+      "after": 1
+    },
+    {
+      "axis": 1,
+      "parameter": 537,
+      "before": 0,
+      "after": 771
+    },
+    {
+      "axis": 1,
+      "parameter": 546,
+      "before": 3000,
+      "after": 200
+    },
+    {
+      "axis": 1,
+      "parameter": 552,
+      "before": 0,
+      "after": 42088
+    },
+    {
+      "axis": 1,
+      "parameter": 553,
+      "before": 0,
+      "after": 42
+    },
+    {
+      "axis": 1,
+      "parameter": 554,
+      "before": 0,
+      "after": 33691
+    },
+    {
+      "axis": 1,
+      "parameter": 555,
+      "before": 0,
+      "after": 42
+    },
+    {
+      "axis": 1,
+      "parameter": 576,
+      "before": 0,
+      "after": 2
+    },
+    {
+      "axis": 1,
+      "parameter": 582,
+      "before": 0,
+      "after": 42088
+    },
+    {
+      "axis": 1,
+      "parameter": 583,
+      "before": 0,
+      "after": 42
+    },
+    {
+      "axis": 1,
+      "parameter": 4354,
+      "before": 0,
+      "after": 1
+    },
+    {
+      "axis": 1,
+      "parameter": 4355,
+      "before": 8192,
+      "after": 8448
+    },
+    {
+      "axis": 1,
+      "parameter": 512,
+      "before": 0,
+      "after": 4097
+    }
+  ],
+  "points_verified": [
+    0,
+    1,
+    2
+  ],
+  "commands": [
+    "SEMI=ON",
+    "SON=OFF",
+    "System Start requested (timeout=30000 ms)",
+    "SEMI=ON after start attempt",
+    "SON=OFF after start attempt"
+  ],
+  "flash_saved": false,
+  "reference_registered": false,
+  "motion_command_sent": false,
+  "errors": [],
+  "system_start_api_succeeded": true,
+  "system_status_code": "0x000A",
+  "axis_status": {
+    "position_counts": 0,
+    "system_running": true,
+    "servo_ready": false,
+    "operating": false,
+    "in_position": false,
+    "operation_complete": true,
+    "home_required": true,
+    "encoder_error": false,
+    "servo_alarm": false,
+    "operation_alarm": false,
+    "servo_warning": false,
+    "forced_stop": true,
+    "interlock_stop": false
+  },
+  "external_emi_disabled": true,
+  "home_complete": false,
+  "alarms": {
+    "system": {
+      "code": "0x0000",
+      "detail": "0x0000"
+    },
+    "servo": {
+      "code": "0x0000",
+      "detail": "0x0000"
+    },
+    "operation": {
+      "code": "0x0000",
+      "detail": "0x0000"
+    }
+  },
+  "post_start_parameter_mismatches": [],
+  "followup_checks": [
+    {
+      "checked_at": "2026-10-13T03:47:34.938545+00:00",
+      "axis_status": {
+        "position_counts": 2,
+        "system_running": true,
+        "servo_ready": false,
+        "operating": false,
+        "in_position": true,
+        "operation_complete": true,
+        "home_required": true,
+        "encoder_error": true,
+        "servo_alarm": true,
+        "operation_alarm": false,
+        "servo_warning": true,
+        "forced_stop": true,
+        "interlock_stop": false
+      },
+      "alarms": {
+        "system": {
+          "code": "0x0000",
+          "detail": "0x0000"
+        },
+        "servo": {
+          "code": "0x0025",
+          "detail": "0x0001"
+        },
+        "operation": {
+          "code": "0x0000",
+          "detail": "0x0000"
+        }
+      },
+      "home_complete": false,
+      "external_emi_disabled": true
+    }
+  ]
+}

@@ -1,0 +1,195 @@
+{
+  "created_at": "2026-10-13T03:56:50.375340+00:00",
+  "user_confirmed_motor_disconnected_from_machine": true,
+  "reference_scope": "arbitrary current motor position for bench testing; not a machine calibration",
+  "reference_coordinate": 2794600,
+  "commands": [
+    "SON=OFF",
+    "SEMI=OFF for motor-only reference registration",
+    "SON=ON for reference registration",
+    "Failure cleanup: SEMI=ON, SON=OFF"
+  ],
+  "errors": [
+    "Unexpected position change on servo enable."
+  ],
+  "reference_registered": false,
+  "position_move_command_sent": false,
+  "before_status": {
+    "position_counts": -18,
+    "system_running": true,
+    "servo_ready": false,
+    "operating": false,
+    "in_position": true,
+    "operation_complete": true,
+    "home_required": true,
+    "encoder_error": true,
+    "servo_alarm": false,
+    "operation_alarm": false,
+    "servo_warning": true,
+    "forced_stop": true,
+    "interlock_stop": false
+  },
+  "parameters_before": {
+    "0x0200": 4097,
+    "0x020A": 1,
+    "0x020B": 0,
+    "0x020C": 1,
+    "0x020D": 0,
+    "0x0219": 771,
+    "0x0240": 2,
+    "0x0241": 0,
+    "0x0246": 42088,
+    "0x0247": 42,
+    "0x0248": 0,
+    "0x0249": 0,
+    "0x024D": 0,
+    "0x024E": 0,
+    "0x024F": 0,
+    "0x1102": 1
+  },
+  "final_status": {
+    "position_counts": -1116,
+    "system_running": true,
+    "servo_ready": true,
+    "operating": false,
+    "in_position": true,
+    "operation_complete": true,
+    "home_required": true,
+    "encoder_error": true,
+    "servo_alarm": false,
+    "operation_alarm": false,
+    "servo_warning": false,
+    "forced_stop": false,
+    "interlock_stop": false
+  },
+  "alarms": {
+    "system": {
+      "code": "0x0000",
+      "detail": "0x0000"
+    },
+    "servo": {
+      "code": "0x0000",
+      "detail": "0x0000"
+    },
+    "operation": {
+      "code": "0x0000",
+      "detail": "0x0000"
+    }
+  },
+  "cleanup_checks": [
+    {
+      "status": {
+        "position_counts": -877,
+        "system_running": true,
+        "servo_ready": false,
+        "operating": false,
+        "in_position": true,
+        "operation_complete": true,
+        "home_required": true,
+        "encoder_error": true,
+        "servo_alarm": false,
+        "operation_alarm": false,
+        "servo_warning": true,
+        "forced_stop": true,
+        "interlock_stop": false
+      },
+      "command": -877,
+      "zero_speed": true
+    },
+    {
+      "status": {
+        "position_counts": -877,
+        "system_running": true,
+        "servo_ready": false,
+        "operating": false,
+        "in_position": true,
+        "operation_complete": true,
+        "home_required": true,
+        "encoder_error": true,
+        "servo_alarm": false,
+        "operation_alarm": false,
+        "servo_warning": true,
+        "forced_stop": true,
+        "interlock_stop": false
+      },
+      "command": -877,
+      "zero_speed": true
+    },
+    {
+      "status": {
+        "position_counts": -877,
+        "system_running": true,
+        "servo_ready": false,
+        "operating": false,
+        "in_position": true,
+        "operation_complete": true,
+        "home_required": true,
+        "encoder_error": true,
+        "servo_alarm": false,
+        "operation_alarm": false,
+        "servo_warning": true,
+        "forced_stop": true,
+        "interlock_stop": false
+      },
+      "command": -877,
+      "zero_speed": true
+    },
+    {
+      "status": {
+        "position_counts": -878,
+        "system_running": true,
+        "servo_ready": false,
+        "operating": false,
+        "in_position": true,
+        "operation_complete": true,
+        "home_required": true,
+        "encoder_error": true,
+        "servo_alarm": false,
+        "operation_alarm": false,
+        "servo_warning": true,
+        "forced_stop": true,
+        "interlock_stop": false
+      },
+      "command": -878,
+      "zero_speed": true
+    },
+    {
+      "status": {
+        "position_counts": -877,
+        "system_running": true,
+        "servo_ready": false,
+        "operating": false,
+        "in_position": true,
+        "operation_complete": true,
+        "home_required": true,
+        "encoder_error": true,
+        "servo_alarm": false,
+        "operation_alarm": false,
+        "servo_warning": true,
+        "forced_stop": true,
+        "interlock_stop": false
+      },
+      "command": -877,
+      "zero_speed": true
+    },
+    {
+      "status": {
+        "position_counts": -875,
+        "system_running": true,
+        "servo_ready": false,
+        "operating": false,
+        "in_position": true,
+        "operation_complete": true,
+        "home_required": true,
+        "encoder_error": true,
+        "servo_alarm": false,
+        "operation_alarm": false,
+        "servo_warning": true,
+        "forced_stop": true,
+        "interlock_stop": false
+      },
+      "command": -877,
+      "zero_speed": true
+    }
+  ]
+}

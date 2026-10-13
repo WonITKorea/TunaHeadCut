@@ -220,7 +220,8 @@ class TcpProcessTests(unittest.TestCase):
         flags = getattr(subprocess, "CREATE_NO_WINDOW", 0)
         receiver = subprocess.Popen(
             [sys.executable, "-u", "main.py", "--tcp-server", "--host", "127.0.0.1",
-             "--port", "0", "--client-timeout", "5", "--once"],
+             "--port", "0", "--client-timeout", "5", "--once",
+             "--config", "position_board/axis_config.utility2.json"],
             cwd=root, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
             text=True, creationflags=flags)
 
@@ -247,9 +248,9 @@ class TcpProcessTests(unittest.TestCase):
             replies = [json.loads(line)["response"] for line in sender.stdout.splitlines()
                        if line.startswith("{")]
             self.assertEqual([reply["feedback_counts"] for reply in replies if reply["ok"]],
-                             [2794600, 2792501, 2790402, 2788302, 2786203])
+                             [11179010, 6984706, 2790402, -1403902, -5598206])
             self.assertEqual([reply["target_counts"] for reply in replies if reply["ok"]],
-                             [2794600, 2792501, 2790402, 2788302, 2786203])
+                             [11179010, 6984706, 2790402, -1403902, -5598206])
             self.assertEqual(sum(not reply["ok"] for reply in replies), 6)
             self.assertIn("PASS: 11 responses", sender.stdout)
             self.assertEqual(receiver.wait(timeout=5), 0, "".join(output))

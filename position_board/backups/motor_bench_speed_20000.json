@@ -1,0 +1,25 @@
+{
+  "created_at": "2026-10-13T04:40:08.371482+00:00",
+  "requested_speed": 20000,
+  "servo_on_sent": false,
+  "position_move_sent": false,
+  "flash_write_sent": false,
+  "status_before": {
+    "position_counts": 7859544,
+    "system_running": true,
+    "servo_ready": false,
+    "operating": false,
+    "in_position": true,
+    "operation_complete": true,
+    "home_required": false,
+    "encoder_error": false,
+    "servo_alarm": false,
+    "operation_alarm": false,
+    "servo_warning": false,
+    "forced_stop": false,
+    "interlock_stop": false
+  },
+  "speed_limit_before": 200,
+  "success": false,
+  "error": "Axis unavailable: feedback position is outside the configured travel range"
+}

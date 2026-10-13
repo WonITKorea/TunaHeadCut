@@ -35,7 +35,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("values", nargs="*", help="default: 0 0.25 0.5 0.75 1")
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=5000)
-    parser.add_argument("--timeout", type=float, default=40.0, help="response timeout in seconds")
+    parser.add_argument("--timeout", type=float, default=75.0,
+                        help="response timeout in seconds (default: 75; exceeds the 60s motion timeout)")
     parser.add_argument("--interval", type=float, default=0.2, help="pause after each response")
     parser.add_argument("--fragment-bytes", type=int, default=0, help="split each request into writes")
     parser.add_argument("--include-invalid", action="store_true", help="also verify six rejected inputs")

@@ -6,7 +6,7 @@ import math
 from pathlib import Path
 from threading import Lock
 import time
-from typing import Protocol
+from typing import Callable, Protocol
 
 
 def integer_in_range(name: str, value: int, minimum: int, maximum: int) -> None:
@@ -157,21 +157,32 @@ class NormalizedAxis:
             if self._servo_owned:
                 self.backend.set_servo(True)
             deadline = time.monotonic() + 5.0
+            settled_since = None
+            settled_position = None
             while True:
                 state = self.status()
                 state.check(self.config, ready=False, idle=True)
-                if state.servo_ready:
-                    self._armed = True
-                    return
-                if time.monotonic() >= deadline:
-                    raise TimeoutError("Servo ON did not reach READY within 5 s.")
+                now = time.monotonic()
+                if state.servo_ready and state.in_position:
+                    if (settled_position is None or abs(state.position_counts - settled_position)
+                            > self.config.position_tolerance_counts):
+                        settled_since = now
+                        settled_position = state.position_counts
+                    if now - settled_since >= 0.25:
+                        self._armed = True
+                        return
+                else:
+                    settled_since = settled_position = None
+                if now >= deadline:
+                    raise TimeoutError("Servo ON did not settle READY and in-position within 5 s.")
                 time.sleep(self.config.poll_interval_s)
         except BaseException:
             self._faulted = True
             # Keep ownership on failure so close() will retry cleanup.
             raise
 
-    def move_normalized(self, value: float | str) -> int:
+    def move_normalized(self, value: float | str, *,
+                        on_progress: Callable[[AxisStatus], None] | None = None) -> int:
         target = self.config.target_counts(value)  # Reject bad input before any I/O.
         if not self._lock.acquire(blocking=False):
             raise RuntimeError("A move is already in progress.")
@@ -190,6 +201,8 @@ class NormalizedAxis:
                 while True:
                     state = self.status()
                     state.check(self.config)
+                    if on_progress is not None:
+                        on_progress(state)
                     if (not state.operating and state.operation_complete and state.in_position
                             and abs(state.position_counts - target)
                             <= self.config.position_tolerance_counts):

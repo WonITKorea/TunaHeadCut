@@ -1,5 +1,4 @@
 from dataclasses import replace
-import json
 import tempfile
 from pathlib import Path
 import unittest
@@ -38,7 +37,7 @@ class MappingTests(unittest.TestCase):
         for changes in (
             {"min_position_counts": None}, {"max_position_counts": 2**31},
             {"min_position_counts": -2000.0}, {"min_position_counts": 6000},
-            {"max_position_counts": -2001}, {"speed": 0}, {"speed": True},
+            {"max_position_counts": -2001}, {"speed": 0}, {"speed": True}, {"speed": None},
             {"acceleration_ms": 0}, {"deceleration_ms": 20001},
             {"move_timeout_s": float("nan")}, {"poll_interval_s": 2},
             {"position_tolerance_counts": 8000},
@@ -58,18 +57,12 @@ class MappingTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 AxisConfig.from_file(config_file)
 
-    def test_example_calibration_loads_with_explicit_speed(self):
-        example = Path(__file__).resolve().parents[1] / "axis_config.example.json"
-        data = json.loads(example.read_text(encoding="utf-8"))
-        with self.assertRaises(ValueError):
-            AxisConfig(**data)
-        data["speed"] = 100
-        with tempfile.TemporaryDirectory() as directory:
-            config_file = Path(directory) / "axis.json"
-            config_file.write_text(json.dumps(data), encoding="utf-8")
-            config = AxisConfig.from_file(config_file)
+    def test_utility2_calibration_has_enough_time_for_full_travel(self):
+        example = Path(__file__).resolve().parents[1] / "position_board" / "axis_config.utility2.json"
+        config = AxisConfig.from_file(example)
         self.assertEqual([config.target_counts(v) for v in (0, 0.5, 1)],
-                         [2794600, 2790402, 2786203])
+                         [11179010, 2790402, -5598206])
+        self.assertGreater(config.move_timeout_s, 16777216 / config.speed + 1)
 
 
 class MotionTests(unittest.TestCase):
@@ -139,6 +132,33 @@ class MotionTests(unittest.TestCase):
             self.axis.arm()
             self.axis.move_normalized(0.5)
         self.assertTrue(self.backend.ready)
+
+    def test_arm_waits_for_in_position_and_stable_feedback(self):
+        self.axis.connect()
+        off = self.backend.read_status()
+        ready = replace(off, servo_ready=True)
+        shifted = replace(ready, position_counts=100)
+        with patch.object(self.backend, "read_status", side_effect=[
+                off, replace(ready, in_position=False), ready, shifted, shifted, shifted]) as read, \
+                patch("servo_axis.time.monotonic", side_effect=[0, 0, 0.1, 0.2, 0.4, 0.6]), \
+                patch("servo_axis.time.sleep"):
+            self.axis.arm()
+            self.assertEqual(read.call_count, 6)
+        self.axis.close()
+
+    def test_progress_reports_actual_feedback_and_failure_stops(self):
+        with self.axis:
+            self.axis.arm()
+            feedback = []
+            self.axis.move_normalized(0.5, on_progress=lambda state: feedback.append(state.position_counts))
+            self.assertEqual(feedback, [5000])
+
+            def interrupted(_state):
+                raise KeyboardInterrupt()
+
+            with patch.object(self.backend, "stop") as stop, self.assertRaises(KeyboardInterrupt):
+                self.axis.move_normalized(1, on_progress=interrupted)
+            stop.assert_called_once_with()
 
     def test_unconfirmed_servo_off_keeps_connection_for_retry(self):
         self.axis.connect()

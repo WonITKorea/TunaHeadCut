@@ -1,0 +1,452 @@
+{
+  "created_at": "2026-10-13T04:00:35.859289+00:00",
+  "motor_disconnected_confirmed": true,
+  "scope": "Arbitrary current motor position, bench only",
+  "coordinate": 2794600,
+  "commands": [
+    "Clear FST/ST and reset only B0.03 from servo-OFF registration attempt",
+    "SON=OFF",
+    "SEMI=OFF",
+    "SON=ON; wait for zero speed and position settling",
+    "sscHomeReturnStart: Data set method=2, home shift=0",
+    "SON=OFF after registration"
+  ],
+  "settling_samples": [
+    {
+      "fb": -896,
+      "cmd": -896,
+      "ready": false,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -898,
+      "cmd": -898,
+      "ready": false,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -869,
+      "cmd": -861,
+      "ready": false,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -1579,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -1630,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -1723,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -1809,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -1954,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -1931,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -1997,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2006,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2017,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2053,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2086,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2097,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2099,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2101,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2111,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2102,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2102,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2099,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2111,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2097,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2113,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2104,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2099,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2101,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2101,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2103,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2094,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2101,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2111,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2113,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2109,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2111,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2101,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2109,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2099,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2101,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2094,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2097,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2104,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2088,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2096,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2102,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2102,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2104,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2099,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2110,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2093,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2101,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2111,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    },
+    {
+      "fb": -2097,
+      "cmd": -2102,
+      "ready": true,
+      "zero_speed": true,
+      "in_position": true
+    }
+  ],
+  "errors": [],
+  "reference_registered": true,
+  "position_move_command_sent": false,
+  "before_status": {
+    "position_counts": -898,
+    "system_running": true,
+    "servo_ready": false,
+    "operating": false,
+    "in_position": true,
+    "operation_complete": true,
+    "home_required": true,
+    "encoder_error": true,
+    "servo_alarm": false,
+    "operation_alarm": true,
+    "servo_warning": true,
+    "forced_stop": true,
+    "interlock_stop": false
+  },
+  "reference_before": {
+    "0x0241": 0,
+    "0x0246": 42088,
+    "0x0247": 42,
+    "0x024D": 0,
+    "0x024E": 0,
+    "0x024F": 0
+  },
+  "registered_status": {
+    "position_counts": 2794600,
+    "system_running": true,
+    "servo_ready": true,
+    "operating": false,
+    "in_position": true,
+    "operation_complete": true,
+    "home_required": false,
+    "encoder_error": false,
+    "servo_alarm": false,
+    "operation_alarm": false,
+    "servo_warning": false,
+    "forced_stop": false,
+    "interlock_stop": false
+  },
+  "reference_after": {
+    "0x0241": 1,
+    "0x0246": 42088,
+    "0x0247": 42,
+    "0x024D": 17170,
+    "0x024E": 8260,
+    "0x024F": 50
+  },
+  "final_status": {
+    "position_counts": 2795143,
+    "system_running": true,
+    "servo_ready": false,
+    "operating": false,
+    "in_position": true,
+    "operation_complete": true,
+    "home_required": false,
+    "encoder_error": false,
+    "servo_alarm": false,
+    "operation_alarm": false,
+    "servo_warning": false,
+    "forced_stop": false,
+    "interlock_stop": false
+  },
+  "home_complete": true
+}

@@ -1,0 +1,222 @@
+{
+  "created_at": "2026-10-13T04:02:10.234370+00:00",
+  "motor_disconnected_confirmed": true,
+  "reference_coordinate": 2790402,
+  "reason": "Allow servo-off motor relaxation inside unchanged 2786203..2794600 target range",
+  "before_reference": {
+    "0x0241": 1,
+    "0x0246": 42088,
+    "0x0247": 42,
+    "0x024D": 17170,
+    "0x024E": 8260,
+    "0x024F": 50
+  },
+  "commands": [
+    "Set home reference coordinate to 2790402; travel limits unchanged",
+    "SON=ON for Data set",
+    "sscHomeReturnStart Data set",
+    "SON=OFF"
+  ],
+  "samples": [
+    {
+      "fb": 2795206,
+      "cmd": 2795206,
+      "ready": false
+    },
+    {
+      "fb": 2795373,
+      "cmd": 2795373,
+      "ready": false
+    },
+    {
+      "fb": 2794647,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794627,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794509,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794416,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794288,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794252,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794223,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794177,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794131,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794102,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794096,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794088,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794069,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794074,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794070,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794057,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794062,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794072,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794071,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794064,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794064,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794068,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794077,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794070,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794074,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794073,
+      "cmd": 2794074,
+      "ready": true
+    },
+    {
+      "fb": 2794073,
+      "cmd": 2794074,
+      "ready": true
+    }
+  ],
+  "errors": [],
+  "before_status": {
+    "position_counts": 2795204,
+    "system_running": true,
+    "servo_ready": false,
+    "operating": false,
+    "in_position": true,
+    "operation_complete": true,
+    "home_required": false,
+    "encoder_error": false,
+    "servo_alarm": false,
+    "operation_alarm": false,
+    "servo_warning": false,
+    "forced_stop": false,
+    "interlock_stop": false
+  },
+  "registered_status": {
+    "position_counts": 2790401,
+    "system_running": true,
+    "servo_ready": true,
+    "operating": false,
+    "in_position": true,
+    "operation_complete": true,
+    "home_required": false,
+    "encoder_error": false,
+    "servo_alarm": false,
+    "operation_alarm": false,
+    "servo_warning": false,
+    "forced_stop": false,
+    "interlock_stop": false
+  },
+  "after_reference": {
+    "0x0241": 1,
+    "0x0246": 37890,
+    "0x0247": 42,
+    "0x024D": 17170,
+    "0x024E": 7734,
+    "0x024F": 50
+  },
+  "final_status": {
+    "position_counts": 2791163,
+    "system_running": true,
+    "servo_ready": false,
+    "operating": false,
+    "in_position": true,
+    "operation_complete": true,
+    "home_required": false,
+    "encoder_error": false,
+    "servo_alarm": false,
+    "operation_alarm": false,
+    "servo_warning": false,
+    "forced_stop": false,
+    "interlock_stop": false
+  },
+  "reference_registered": true
+}

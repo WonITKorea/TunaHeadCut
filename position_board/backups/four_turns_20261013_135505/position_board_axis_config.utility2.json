@@ -1,0 +1,11 @@
+{
+  "min_position_counts": 2786203,
+  "max_position_counts": 2794600,
+  "reverse_direction": true,
+  "speed": 200,
+  "acceleration_ms": 500,
+  "deceleration_ms": 500,
+  "position_tolerance_counts": 10,
+  "move_timeout_s": 60.0,
+  "poll_interval_s": 0.02
+}
