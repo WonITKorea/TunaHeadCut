@@ -2,7 +2,7 @@
   "min_position_counts": -5598206,
   "max_position_counts": 11179010,
   "reverse_direction": true,
-  "speed": 419430,
+  "speed": 420000,
   "acceleration_ms": 500,
   "deceleration_ms": 500,
   "position_tolerance_counts": 10,
